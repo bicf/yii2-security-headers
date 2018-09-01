@@ -3,7 +3,7 @@
     "description": "Security oriented headers management",
     "keywords": ["yii2"],
     "type": "yii2-extension",
-    "license": "GPL2",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "Ivan Buttinoni",
