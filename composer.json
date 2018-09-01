@@ -1,0 +1,27 @@
+{
+    "name": "bicf/yii2-security-headers",
+    "description": "Security oriented headers management",
+    "keywords": ["yii2"],
+    "type": "yii2-extension",
+    "license": "GPL2",
+    "authors": [
+        {
+            "name": "Ivan Buttinoni",
+            "email": "ivan.buttinoni@cibi.it"
+        }
+    ],
+    "require": {
+      "yiisoft/yii2": "*"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "bicf\\securityheaders\\": "src"
+        }
+    }
+}
