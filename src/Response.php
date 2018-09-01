@@ -66,6 +66,9 @@ class Response extends \yii\web\Response
      */
     public $modules=array();
 
+    /**
+     *
+     */
     protected function modulesInit()
     {
         foreach ($this->modules as $module){
@@ -73,6 +76,9 @@ class Response extends \yii\web\Response
         }
     }
 
+    /**
+     *
+     */
     protected function modulesSendHeaders()
     {
         foreach ($this->modules as $module){
