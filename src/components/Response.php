@@ -1,5 +1,7 @@
 <?php
 namespace bicf\securityheaders\components;
+use bicf\securityheaders\modules\HeaderModuleBase;
+use Yii;
 
 /**
  * Class Response
@@ -56,22 +58,36 @@ namespace bicf\securityheaders\components;
  *         ],
  *     ],
  * ]
- * 
+ *
  * ```
  */
 class Response extends \yii\web\Response
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+        foreach ($this->modules as $name => $module) {
+            if (!$module instanceof HeaderModuleBase) {
+                $this->modules[$name] = Yii::createObject($module);
+            }
+        }
+    }
+
     /** @var array of header modules default is empty
-     *   use the configuration to populate the array 
+     *   use the configuration to populate the array
      */
     public $modules=array();
 
     /**
      *
      */
-    protected function modulesInit()
+    public static function modulesInit($event)
     {
-        foreach ($this->modules as $module){
+        /** @var $event->sender \bicf\securityheaders\components\Response */
+        foreach ($event->sender->modules as $key => $module){
             $module->init();
         }
     }
@@ -79,9 +95,10 @@ class Response extends \yii\web\Response
     /**
      *
      */
-    protected function modulesSendHeaders()
+    public static function modulesSendHeaders($event)
     {
-        foreach ($this->modules as $module){
+        /** @var $event->sender \bicf\securityheaders\components\Response */
+        foreach ($event->sender->modules as $module){
             $module->run();
         }
     }

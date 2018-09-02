@@ -48,7 +48,7 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
 
         $sep=$value='';
         foreach ($this->policies as $k => $v){
-            $value .="$sep$k $v; ";
+            $value .="$sep$k $v";
             $sep ="; ";
         }
         \Yii::$app->response->headers->set($this->headerName,$value);
