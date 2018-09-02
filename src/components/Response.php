@@ -1,5 +1,5 @@
 <?php
-use bicf\securityheaders\components;
+namespace bicf\securityheaders\components;
 
 /**
  * Class Response
