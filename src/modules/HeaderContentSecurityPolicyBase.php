@@ -48,7 +48,10 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
 
     public function injectBehavior(Response $response)
     {
-        $response->attachBehavior('cspBehavior',new ContentSecurityPolicyBehavior() );
+        // Avoid double attach
+        if($response->getBehavior('cspBehavior') === null){
+            $rv = $response->attachBehavior('cspBehavior',new ContentSecurityPolicyBehavior() );
+        }
     }
 
 }

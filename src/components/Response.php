@@ -61,7 +61,7 @@ use Yii;
  *
  * ```
  */
-class Response extends \yii\web\Response
+class Response extends \yii\web\Response implements SecureRequestInterface
 {
     /**
      * {@inheritdoc}
@@ -70,12 +70,18 @@ class Response extends \yii\web\Response
     {
         parent::init();
         foreach ($this->modules as $name => $module) {
-            if (!$module instanceof HeaderModuleBase) {
-                /** @var HeaderModuleBase $module */
-                $module = Yii::createObject($module);
-                $this->modules[$name]  = $module;
-                $module->injectBehavior($this);
+            if ($module instanceof HeaderModuleBase) {
+                continue;
             }
+            if (isset($module['enabled']) && $module['enabled'] == false) {
+                // is not enable will be removed from list
+                unset($this->modules[$name]);
+                continue;
+            }
+            /** @var HeaderModuleBase $headerModule */
+            $headerModule = Yii::createObject($module);
+            $this->modules[$name]  = $headerModule;
+            $headerModule->injectBehavior($this);
         }
     }
 
@@ -83,17 +89,6 @@ class Response extends \yii\web\Response
      *   use the configuration to populate the array
      */
     public $modules=array();
-
-    /**
-     *
-     */
-    public static function modulesInit($event)
-    {
-        /** @var $event->sender \bicf\securityheaders\components\Response */
-        foreach ($event->sender->modules as $key => $module){
-            $module->init();
-        }
-    }
 
     /**
      *
