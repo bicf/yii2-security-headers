@@ -9,8 +9,11 @@
 namespace bicf\securityheaders\modules;
 
 
+use yii\web\Response;
+
 interface HeaderModuleInterface
 {
     public function init();
+    public function injectBehavior(Response $response);
     public function run();
 }

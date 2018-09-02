@@ -71,7 +71,10 @@ class Response extends \yii\web\Response
         parent::init();
         foreach ($this->modules as $name => $module) {
             if (!$module instanceof HeaderModuleBase) {
-                $this->modules[$name] = Yii::createObject($module);
+                /** @var HeaderModuleBase $module */
+                $module = Yii::createObject($module);
+                $this->modules[$name]  = $module;
+                $module->injectBehavior($this);
             }
         }
     }

@@ -10,6 +10,7 @@ namespace bicf\securityheaders\modules;
 
 
 use yii\base\BaseObject;
+use yii\web\Response;
 
 /**
  * Class HeaderModuleBase
@@ -23,4 +24,8 @@ abstract class HeaderModuleBase extends BaseObject implements HeaderModuleInterf
      * on and off according to specific conditions.
      */
      public $enabled=true;
+
+    public function injectBehavior(Response $response)
+    {
+    }
 }

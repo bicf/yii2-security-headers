@@ -1,7 +1,6 @@
 <?php
 
 namespace bicf\securityheaders\modules;
-use yii\base\BaseObject;
 
 /**
  * Class HeaderAccessControlAllowOrigin

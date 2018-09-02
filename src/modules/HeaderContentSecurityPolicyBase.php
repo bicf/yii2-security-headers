@@ -1,7 +1,8 @@
 <?php
 
 namespace bicf\securityheaders\modules;
-use yii\base\BaseObject;
+use bicf\securityheaders\behavior\ContentSecurityPolicyBehavior;
+use yii\web\Response;
 
 /**
  * Class HeaderContentSecurityPolicyBase
@@ -19,20 +20,11 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     const CONNECT_SRC = 'connect-src';
     const REPORT_URI = 'report-uri';
 
-    private static $token;
     protected $headerName;
 
     public  $policies = array();
 
     public $nonceEnabled = true;
-
-    public static function getToken()
-    {
-        if(self::$token === null){
-            self::$token= \Yii::$app->security->generateRandomString();
-        }
-        return self::$token;
-    }
 
     /**
      * add the security header
@@ -43,7 +35,7 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
         }
         if($this->nonceEnabled){
             $scriptSrc = isset($this->policies[self::SCRIPT_SRC])?$this->policies[self::SCRIPT_SRC]:'';
-            $this->policies[self::SCRIPT_SRC] = "$scriptSrc 'nonce-".self::getToken()."'";
+            $this->policies[self::SCRIPT_SRC] = "$scriptSrc ".\Yii::$app->response->getContentSecurityPolicyTokenHeader();
         }
 
         $sep=$value='';
@@ -53,4 +45,10 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
         }
         \Yii::$app->response->headers->set($this->headerName,$value);
     }
+
+    public function injectBehavior(Response $response)
+    {
+        $response->attachBehavior('cspBehavior',new ContentSecurityPolicyBehavior() );
+    }
+
 }
