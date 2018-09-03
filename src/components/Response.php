@@ -97,7 +97,7 @@ class Response extends \yii\web\Response implements SecureRequestInterface
     {
         /** @var $event->sender \bicf\securityheaders\components\Response */
         foreach ($event->sender->modules as $module){
-            $module->run();
+            $module->send();
         }
     }
 }

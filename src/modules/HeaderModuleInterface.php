@@ -15,5 +15,5 @@ interface HeaderModuleInterface
 {
     public function init();
     public function injectBehavior(Response $response);
-    public function run();
+    public function send();
 }

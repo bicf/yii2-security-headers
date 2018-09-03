@@ -10,7 +10,7 @@ class HeaderAccessControlAllowOrigin extends HeaderModuleBase
 {
     public $value;
 
-    public function run()
+    public function send()
     {
         if(!$this->enabled){
             return;

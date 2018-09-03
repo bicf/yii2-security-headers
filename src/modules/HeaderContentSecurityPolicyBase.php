@@ -1,7 +1,8 @@
 <?php
 
 namespace bicf\securityheaders\modules;
-use bicf\securityheaders\behavior\ContentSecurityPolicyBehavior;
+use bicf\securityheaders\behavior\ContentSecurityPolicyNonceBehavior;
+use bicf\securityheaders\components\SecureRequestInterface;
 use yii\web\Response;
 
 /**
@@ -20,16 +21,22 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     const CONNECT_SRC = 'connect-src';
     const REPORT_URI = 'report-uri';
 
+    /**
+     * @var string contain the name of the header sent
+     */
     protected $headerName;
 
     public  $policies = array();
 
+    /**
+     * @var bool
+     */
     public $nonceEnabled = true;
 
     /**
      * add the security header
      */
-    public function run(){
+    public function send(){
         if(!$this->enabled){
             return;
         }
@@ -49,8 +56,8 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     public function injectBehavior(Response $response)
     {
         // Avoid double attach
-        if($response->getBehavior('cspBehavior') === null){
-            $rv = $response->attachBehavior('cspBehavior',new ContentSecurityPolicyBehavior() );
+        if($this->nonceEnabled && $response->getBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR) === null){
+            $rv = $response->attachBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR,new ContentSecurityPolicyNonceBehavior() );
         }
     }
 

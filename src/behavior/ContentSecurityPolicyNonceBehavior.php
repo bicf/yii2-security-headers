@@ -7,7 +7,7 @@ use yii\base\Behavior;
  * Class HeaderContentSecurityPolicyAcl
  * @package bicf\securityheaders\modules
  */
-class ContentSecurityPolicyBehavior extends Behavior
+class ContentSecurityPolicyNonceBehavior extends Behavior
 {
     private static $token;
 

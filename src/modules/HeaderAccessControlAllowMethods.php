@@ -18,7 +18,7 @@ class HeaderAccessControlAllowMethods extends HeaderModuleBase
         }
     }
 
-    public function run()
+    public function send()
     {
         if(!$this->enabled){
             return;
