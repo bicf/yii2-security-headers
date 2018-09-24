@@ -10,7 +10,7 @@ class HeaderAccessControlAllowOrigin extends HeaderModuleBase
 {
     public $value;
 
-    public function send()
+    public function run()
     {
         if(!$this->enabled){
             return;
@@ -18,6 +18,6 @@ class HeaderAccessControlAllowOrigin extends HeaderModuleBase
         if($this->value === null){
             return;
         }
-        \Yii::$app->response->headers->set('Access-Control-Allow-Origin',$this->value);
+        \Yii::$app->response->headers->add('Access-Control-Allow-Origin',$this->value);
     }
 }

@@ -20,11 +20,11 @@ class HeaderXContentTypeOptions extends HeaderModuleBase
     }
 
 
-    public function send()
+    public function run()
     {
         if(!$this->enabled){
             return;
         }
-        \Yii::$app->response->headers->set('X-Content-Type-Options',$this->value);
+        \Yii::$app->response->headers->add('X-Content-Type-Options',$this->value);
     }
 }

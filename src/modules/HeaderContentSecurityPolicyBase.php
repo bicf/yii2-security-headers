@@ -36,7 +36,7 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     /**
      * add the security header
      */
-    public function send(){
+    public function run(){
         if(!$this->enabled){
             return;
         }
@@ -50,7 +50,7 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
             $value .="$sep$k $v";
             $sep ="; ";
         }
-        \Yii::$app->response->headers->set($this->headerName,$value);
+        \Yii::$app->response->headers->add($this->headerName,$value);
     }
 
     public function injectBehavior(Response $response)

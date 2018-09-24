@@ -18,11 +18,12 @@ class HeaderAccessControlAllowMethods extends HeaderModuleBase
         }
     }
 
-    public function send()
+    public function run()
     {
         if(!$this->enabled){
             return;
         }
-        \Yii::$app->response->headers->set('Access-Control-Allow-Methods',$this->value);
+//        new Header
+        \Yii::$app->response->headers->add('Access-Control-Allow-Methods',$this->value);
     }
 }

@@ -5,13 +5,13 @@ use Yii;
 
 /**
  * Class Response
+ *
  * ```php
  * [
  *     'components' => [
  *         'response' => [
  *             'class' => 'bicf\securityheaders\Response',
- *             'on afterPrepare' => ['bicf\securityheaders\Response','modulesInit'],
- *             'on afterSend' => ['bicf\securityheaders\Response','modulesSendHeaders'],
+ *             'on afterPrepare' => ['bicf\securityheaders\Response','addSecurityHeaders'],
  *             'modules' => [
  *                'XContentTypeOptions'=>[
  *                    'class' => 'bicf\securityheaders\modules\HeaderXContentTypeOptions',
@@ -93,11 +93,11 @@ class Response extends \yii\web\Response implements SecureRequestInterface
     /**
      *
      */
-    public static function modulesSendHeaders($event)
+    public static function addSecurityHeaders($event)
     {
         /** @var $event->sender \bicf\securityheaders\components\Response */
         foreach ($event->sender->modules as $module){
-            $module->send();
+            $module->run();
         }
     }
 }
