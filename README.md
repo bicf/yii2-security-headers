@@ -3,9 +3,9 @@ Yii2 headers security
 
 Introduction <a name="introduction"></a>
 ------------
-Yii2 implementation of [CSP - Content Security Policy]: https://getcomposer.org/ "CSP - Content Security Policy"
+Yii2 implementation of [CSP - Content Security Policy](https://www.w3.org/TR/CSP1/) 
 
-See also [MDN docs]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP "MDN"
+See also [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)  
 
 
 
