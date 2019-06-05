@@ -42,7 +42,7 @@ An example of configuration:
 
 
 
-Class Response
+Class Response configuration in main.php
 
 ```php
 [
