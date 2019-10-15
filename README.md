@@ -48,8 +48,8 @@ Class Response configuration in main.php
 [
     'components' => [
         'response' => [
-            'class' => 'bicf\securityheaders\Response',
-            'on afterPrepare' => ['bicf\securityheaders\Response','addSecurityHeaders'],
+            'class' => 'bicf\securityheaders\components\Response',
+            'on afterPrepare' => ['bicf\securityheaders\components\Response','addSecurityHeaders'],
             'modules' => [
                'XContentTypeOptions'=>[
                    'class' => 'bicf\securityheaders\modules\HeaderXContentTypeOptions',
