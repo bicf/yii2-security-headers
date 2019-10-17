@@ -11,6 +11,15 @@ class ContentSecurityPolicyNonceBehavior extends Behavior
 {
     private static $token;
 
+    public static function setContentSecurityPolicyToken($token)
+    {
+        if(self::$token === null){
+            self::$token= $token;
+        } else {
+            throw new \UnexpectedValueException("Token already setted!");
+        }
+    }
+
     public static function getContentSecurityPolicyToken()
     {
         if(self::$token === null){
