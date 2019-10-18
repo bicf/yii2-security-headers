@@ -2,8 +2,9 @@
 
 namespace bicf\securityheaders\modules;
 use bicf\securityheaders\behavior\ContentSecurityPolicyNonceBehavior;
+use bicf\securityheaders\behavior\ContentSecurityPolicyDummyBehavior;
 use bicf\securityheaders\components\SecureRequestInterface;
-use yii\web\Response;
+use bicf\securityheaders\components\Response;
 
 /**
  * Class HeaderContentSecurityPolicyBase
@@ -29,9 +30,12 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     public  $policies = array();
 
     /**
-     * @var bool
+     * @var bool create a beahvior that handle the nonce hash
      */
     public $nonceEnabled = true;
+
+    /** @var bool nonceFallback create a dummy behavior when $nonceEnabled is not enabled */
+    public $nonceFallback = false;
 
     /**
      * add the security header
@@ -57,7 +61,10 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     {
         // Avoid double attach
         if($this->nonceEnabled && $response->getBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR) === null){
-            $rv = $response->attachBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR,new ContentSecurityPolicyNonceBehavior() );
+            $response->attachBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR,new ContentSecurityPolicyNonceBehavior() );
+        } elseif($this->nonceFallback) {
+            $response->attachBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR,new ContentSecurityPolicyDummyBehavior() );
+
         }
     }
 

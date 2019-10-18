@@ -9,8 +9,8 @@
 namespace bicf\securityheaders\modules;
 
 
+use bicf\securityheaders\components\Response;
 use yii\base\BaseObject;
-use yii\web\Response;
 
 /**
  * Class HeaderModuleBase

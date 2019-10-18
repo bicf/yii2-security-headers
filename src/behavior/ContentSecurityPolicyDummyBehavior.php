@@ -1,34 +1,34 @@
 <?php
 
 namespace bicf\securityheaders\behavior;
-use yii\base\Behavior;
 
 /**
  * Class HeaderContentSecurityPolicyAcl
  * @package bicf\securityheaders\modules
  */
-class ContentSecurityPolicyNonceBehavior extends ContentSecurityPolicy
+class ContentSecurityPolicyDummyBehavior extends ContentSecurityPolicy
 {
     public function getContentSecurityPolicyTokenValue()
     {
-        return self::getContentSecurityPolicyToken();
+        return "";
     }
+
 
     public function getContentSecurityPolicyTokenAttribute()
     {
-        return 'nonce="'.self::getContentSecurityPolicyToken().'"';
+        return "";
 
     }
 
     public function getContentSecurityPolicyTokenHeader()
     {
-        return "'nonce-".self::getContentSecurityPolicyToken()."'";
+        return "";
 
     }
 
     public function getContentSecurityPolicyTokenArray()
     {
-        return array('nonce'=>self::getContentSecurityPolicyToken());
+        return [];
     }
 
 

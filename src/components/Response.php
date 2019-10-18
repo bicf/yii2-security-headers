@@ -1,6 +1,7 @@
 <?php
 namespace bicf\securityheaders\components;
 use bicf\securityheaders\modules\HeaderModuleBase;
+use bicf\securityheaders\modules\HeaderModuleInterface;
 use Yii;
 
 /**
@@ -91,12 +92,13 @@ class Response extends \yii\web\Response implements SecureRequestInterface
     public $modules=array();
 
     /**
-     *
+     * @param $event
      */
     public static function addSecurityHeaders($event)
     {
         /** @var $event->sender \bicf\securityheaders\components\Response */
         foreach ($event->sender->modules as $module){
+            /** @var HeaderModuleInterface $module */
             $module->run();
         }
     }

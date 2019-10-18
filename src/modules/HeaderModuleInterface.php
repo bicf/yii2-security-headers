@@ -9,7 +9,7 @@
 namespace bicf\securityheaders\modules;
 
 
-use yii\web\Response;
+use bicf\securityheaders\components\Response;
 
 interface HeaderModuleInterface
 {
