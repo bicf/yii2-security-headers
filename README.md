@@ -105,7 +105,7 @@ Yii2 integration of Content Security Policy Header
 
 Possible integrations
 ----------------
-CSP can work by **signature** or by **token** (*nonce*)
+CSP can work by **signature** or by the **nonce token**
 see:
 
 
@@ -121,7 +121,7 @@ Example:
 This kind of integration does not require patch to the framework code but it's space wasting and hard to mantain 
 even with a small number of signatures.
 
-Integration by token (nonce) 
+Integration by nonce token 
 ----------------
 This kind of integration require some (small) patch at framework (\yii\helpers\BaseHtml) level to take full advantage of nonce token.
 The nonce feature (enabled by default) don't need maintenace once integrated and has reduced footprint on the header
@@ -238,6 +238,16 @@ In detail the line:
 ```php
 echo '<script '.Yii::$app->response->getContentSecurityPolicyTokenAttribute().'>' . $view->renderPhpFile(__DIR__ . '/assets/toolbar.js') . '</script>';
 
+```
+Runtime disabilitation 
+----------------
+Since no header is sent until the ```render``` call it's possible to disable one or more modules as needed.
+ 
+```php
+public function actionIndex() {
+    Yii::$app->getResponse()->modules['sample-module']->enabled=false;
+    return $this->render("index");
+}
 ```
 
 
