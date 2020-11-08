@@ -15,10 +15,70 @@ use yii\base\Event;
 use yii\web\Response;
 
 /**
- * The Yii Debug Module provides the debug toolbar and debugger
+ * Class Module
+ * @package bicf\securityheaders
  *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * ```php
+ * [
+ *     'bootstrap'=>[
+ *         'securityHeader',
+ *     ],
+ *     'modules' => [
+ *         'securityHeader' => [
+ *             'class' => bicf\securityheaders\Module::class,
+ *             'modules' => [
+ *                'XContentTypeOptions'=>[
+ *                    'class' => 'bicf\securityheaders\modules\HeaderXContentTypeOptions',
+ *                    'value' => 'nosniff',
+ *                ],
+ *                'AccessControlAllowMethods'=>[
+ *                    'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowMethods',
+ *                    'value' => 'GET',
+ *                ],
+ *                'AccessControlAllowOrigin'=>[
+ *                    'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowOrigin',
+ *                    'value' => 'https://api.example.com',
+ *                ],
+ *                'ContentSecurityPolicyAcl'=>[
+ *                    'class' => 'bicf\securityheaders\modules\HeaderContentSecurityPolicyAcl',
+ *                    'enabled' => false,
+ *                    'policies' => [
+ *                        'default-src' => "'self'",
+ *                        'frame-src'   => "'self' www.facebook.com www.youtube.com www.google.com",
+ *                        'img-src'     => "'self' www.google-analytics.com",
+ *                        'font-src'    => "'self' fonts.gstatic.com maxcdn.bootstrapcdn.com",
+ *                        'media-src'   => "'self'",
+ *                        'script-src'  => "'self' www.google-analytics.com",
+ *                        'style-src'   => "'self' maxcdn.bootstrapcdn.com",
+ *                         'connect-src' => "'self'",
+ *                         'report-uri'  => "/report-csp-acl",
+ *                     ],
+ *                 ],
+ *                 'ContentSecurityPolicyMonitor'=>[
+ *                     'class' => 'bicf\securityheaders\modules\HeaderContentSecurityPolicyMonitor',
+ *                     'policies' => [
+ *                         'default-src' => "'self'",
+ *                         'frame-src'   => "'self' www.facebook.com www.youtube.com www.google.com",
+ *                         'img-src'     => "'self' www.google-analytics.com",
+ *                         'font-src'    => "'self' fonts.gstatic.com maxcdn.bootstrapcdn.com",
+ *                         'media-src'   => "'self'",
+ *                         'script-src'  => "'self' www.google-analytics.com",
+ *                         'style-src'   => "'self' maxcdn.bootstrapcdn.com",
+ *                         'connect-src' => "'self'",
+ *                         'report-uri'  => "/report-csp-acl",
+ *                     ],
+ *                 ],
+ *             ],
+ *         ],
+ *     ],
+ *
+ *     'components' => [
+ *         // components stuff
+ *         // no need to add anything
+ *     ],
+ * ]
+ *
+ * ```
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
