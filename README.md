@@ -34,22 +34,19 @@ Then proceed to configuration.
 Configuration <a name="configuration"></a>
 ------------
 
+The version 1.1 is a Module implementation.   
 
-> **IMPORTANT:** If you don't setup your configuration no header will be sent.
+Module  _securityHeader_ sample configuration in main.php
 
-
-An example of configuration:
-
-
-
-Class Response configuration in main.php
 
 ```php
 [
-    'components' => [
-        'response' => [
-            'class' => 'bicf\securityheaders\components\Response',
-            'on afterPrepare' => ['bicf\securityheaders\components\Response','addSecurityHeaders'],
+    'bootstrap'=>[
+        'securityHeader',
+    ],
+    'modules' => [
+        'securityHeader' => [
+            'class' => bicf\securityheaders\Module::class,
             'modules' => [
                'XContentTypeOptions'=>[
                    'class' => 'bicf\securityheaders\modules\HeaderXContentTypeOptions',
@@ -95,8 +92,12 @@ Class Response configuration in main.php
             ],
         ],
     ],
-]
 
+    'components' => [
+        // components stuff
+        // no need to add anything
+    ],
+]
 ```
 
 
@@ -252,3 +253,67 @@ public function actionIndex() {
 
 
 
+
+Legacy Implementation <a name="legacy_configuration"></a>
+--------------------
+
+This is the old implementation, extending the Request Class.
+
+> **IMPORTANT:** If you don't setup your configuration no header will be sent.
+
+An example of configuration:
+
+```php
+[
+    'components' => [
+        'response' => [
+            'class' => 'bicf\securityheaders\components\Response',
+            'on afterPrepare' => ['bicf\securityheaders\components\Response','addSecurityHeaders'],
+            'modules' => [
+               'XContentTypeOptions'=>[
+                   'class' => 'bicf\securityheaders\modules\HeaderXContentTypeOptions',
+                   'value' => 'nosniff',
+               ],
+               'AccessControlAllowMethods'=>[
+                   'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowMethods',
+                   'value' => 'GET',
+               ],
+               'AccessControlAllowOrigin'=>[
+                   'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowOrigin',
+                   'value' => 'https://api.example.com',
+               ],
+               'ContentSecurityPolicyAcl'=>[
+                   'class' => 'bicf\securityheaders\modules\HeaderContentSecurityPolicyAcl',
+                   'enabled' => false,
+                   'policies' => [
+                       'default-src' => "'self'",
+                       'frame-src'   => "'self' www.facebook.com www.youtube.com www.google.com",
+                       'img-src'     => "'self' www.google-analytics.com",
+                       'font-src'    => "'self' fonts.gstatic.com maxcdn.bootstrapcdn.com",
+                       'media-src'   => "'self'",
+                       'script-src'  => "'self' www.google-analytics.com",
+                       'style-src'   => "'self' maxcdn.bootstrapcdn.com",
+                        'connect-src' => "'self'",
+                        'report-uri'  => "/report-csp-acl",
+                    ],
+                ],
+                'ContentSecurityPolicyMonitor'=>[
+                    'class' => 'bicf\securityheaders\modules\HeaderContentSecurityPolicyMonitor',
+                    'policies' => [
+                        'default-src' => "'self'",
+                        'frame-src'   => "'self' www.facebook.com www.youtube.com www.google.com",
+                        'img-src'     => "'self' www.google-analytics.com",
+                        'font-src'    => "'self' fonts.gstatic.com maxcdn.bootstrapcdn.com",
+                        'media-src'   => "'self'",
+                        'script-src'  => "'self' www.google-analytics.com",
+                        'style-src'   => "'self' maxcdn.bootstrapcdn.com",
+                        'connect-src' => "'self'",
+                        'report-uri'  => "/report-csp-acl",
+                    ],
+                ],
+            ],
+        ],
+    ],
+]
+
+```
