@@ -4,7 +4,6 @@ namespace bicf\securityheaders\modules;
 use bicf\securityheaders\behavior\ContentSecurityPolicyNonceBehavior;
 use bicf\securityheaders\behavior\ContentSecurityPolicyDummyBehavior;
 use bicf\securityheaders\components\SecureRequestInterface;
-use bicf\securityheaders\components\Response;
 
 /**
  * Class HeaderContentSecurityPolicyBase
@@ -57,7 +56,7 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
         \Yii::$app->response->headers->add($this->headerName,$value);
     }
 
-    public function injectBehavior(Response $response)
+    public function injectBehavior(\yii\web\Response $response)
     {
         // Avoid double attach
         if($this->nonceEnabled && $response->getBehavior(SecureRequestInterface::CSP_NONCE_BEHAVIOR) === null){

@@ -1,13 +1,11 @@
 <?php
 namespace bicf\securityheaders\modules;
 
-use yii\base\BaseObject;
-
 /**
  * Class HeaderXContentTypeOptions
  * @package bicf\securityheaders\modules
  */
-class HeaderXContentTypeOptions extends HeaderModuleBase
+class HeaderXContentTypeOptions extends HeaderModuleSimple
 {
     private $defaultValue='nosniff';
     public $value;

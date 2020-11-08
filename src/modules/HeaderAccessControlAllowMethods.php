@@ -6,7 +6,7 @@ namespace bicf\securityheaders\modules;
  * Class HeaderAccessControlAllowMethods
  * @package bicf\securityheaders\modules
  */
-class HeaderAccessControlAllowMethods extends HeaderModuleBase
+class HeaderAccessControlAllowMethods extends HeaderModuleSimple
 {
     private $defaultValue='GET';
     public $value;

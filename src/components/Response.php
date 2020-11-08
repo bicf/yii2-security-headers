@@ -65,7 +65,7 @@ use Yii;
 class Response extends \yii\web\Response implements SecureRequestInterface
 {
     /**
-     * {@inheritdoc}
+     * @throws \yii\base\InvalidConfigException
      */
     public function init()
     {
@@ -80,7 +80,7 @@ class Response extends \yii\web\Response implements SecureRequestInterface
                 continue;
             }
             /** @var HeaderModuleBase $headerModule */
-            $headerModule = Yii::createObject($module);
+            $headerModule = Yii::createObject($module, [$name, $this]);
             $this->modules[$name]  = $headerModule;
             $headerModule->injectBehavior($this);
         }

@@ -6,7 +6,7 @@ namespace bicf\securityheaders\modules;
  * Class HeaderAccessControlAllowOrigin
  * @package bicf\securityheaders\modules
  */
-class HeaderAccessControlAllowOrigin extends HeaderModuleBase
+class HeaderAccessControlAllowOrigin extends HeaderModuleSimple
 {
     public $value;
 

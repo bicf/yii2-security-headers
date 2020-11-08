@@ -10,7 +10,7 @@ namespace bicf\securityheaders\modules;
  * @see https://stackoverflow.com/a/7454204/7002281
  * @package bicf\securityheaders\modules
  */
-class HeaderAccessControlAllowOriginByWhiteList extends HeaderModuleBase
+class HeaderAccessControlAllowOriginByWhiteList extends HeaderModuleSimple
 {
     /**
      * @var string[] of hosts in white list

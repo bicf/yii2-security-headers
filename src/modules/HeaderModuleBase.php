@@ -1,23 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ivan
- * Date: 9/1/18
- * Time: 12:21 AM
- */
 
 namespace bicf\securityheaders\modules;
 
-
-use bicf\securityheaders\components\Response;
-use yii\base\BaseObject;
 
 /**
  * Class HeaderModuleBase
  * @package bicf\securityheaders\modules
  * @property boolean $enabled 
  */
-abstract class HeaderModuleBase extends BaseObject implements HeaderModuleInterface
+abstract class HeaderModuleBase extends \yii\base\Module implements HeaderModuleInterface
 {
     /**
      * @var bool whether to enabled the module or not. Allows to turn the module header
@@ -25,7 +16,27 @@ abstract class HeaderModuleBase extends BaseObject implements HeaderModuleInterf
      */
      public $enabled=true;
 
-    public function injectBehavior(Response $response)
+    /**
+     * Enable the module
+     */
+    public function enable()
     {
+        $this->enabled=true;
     }
+
+    /**
+     * Disable the module
+     */
+    public function disable()
+    {
+        $this->enabled=false;
+    }
+
+    /**
+     * now implemented in the child
+     * @param \yii\web\Response $response
+     * @return mixed
+     */
+    public abstract function injectBehavior(\yii\web\Response $response);
+
 }
