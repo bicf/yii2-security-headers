@@ -5,24 +5,8 @@ namespace bicf\securityheaders\modules;
  * Class HeaderXContentTypeOptions
  * @package bicf\securityheaders\modules
  */
-class HeaderXContentTypeOptions extends HeaderModuleSimple
+class HeaderXContentTypeOptions extends HeaderModuleSimpleKeyVal
 {
-    private $defaultValue='nosniff';
-    public $value;
-
-    public function init()
-    {
-        if($this->value === null){
-            $this->value =$this->defaultValue;
-        }
-    }
-
-
-    public function run()
-    {
-        if(!$this->enabled){
-            return;
-        }
-        \Yii::$app->response->headers->add('X-Content-Type-Options',$this->value);
-    }
+    protected $defaultValue='nosniff';
+    protected $header='X-Content-Type-Options';
 }

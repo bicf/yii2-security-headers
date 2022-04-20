@@ -1,29 +1,12 @@
 <?php
-
 namespace bicf\securityheaders\modules;
 
 /**
- * Class HeaderAccessControlAllowMethods
+ * Class HeaderXContentTypeOptions
  * @package bicf\securityheaders\modules
  */
-class HeaderAccessControlAllowMethods extends HeaderModuleSimple
+class HeaderAccessControlAllowMethods extends HeaderModuleSimpleKeyVal
 {
-    private $defaultValue='GET';
-    public $value;
-
-    public function init()
-    {
-        if($this->value === null){
-            $this->value =$this->defaultValue;
-        }
-    }
-
-    public function run()
-    {
-        if(!$this->enabled){
-            return;
-        }
-//        new Header
-        \Yii::$app->response->headers->add('Access-Control-Allow-Methods',$this->value);
-    }
+    protected $header='Access-Control-Allow-Methods';
+    protected $defaultValue='GET';
 }
