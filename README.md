@@ -52,6 +52,10 @@ Module  _securityHeader_ sample configuration in main.php
                    'class' => 'bicf\securityheaders\modules\HeaderXContentTypeOptions',
                    'value' => 'nosniff',
                ],
+               'XFrameOptions'=>[
+                   'class' => bicf\securityheaders\modules\HeaderXFrameOptions::class,
+                   'value' => 'SAMEORIGIN',
+               ],
                'AccessControlAllowMethods'=>[
                    'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowMethods',
                    'value' => 'GET',
@@ -275,7 +279,7 @@ An example of configuration:
                    'value' => 'nosniff',
                ],
                'AccessControlAllowMethods'=>[
-                   'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowMethods',
+                   'class' => 'bicf\securityheaders\modules\HeaderAccessControlAllowMethods2',
                    'value' => 'GET',
                ],
                'AccessControlAllowOrigin'=>[
