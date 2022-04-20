@@ -53,7 +53,7 @@ Module  _securityHeader_ sample configuration in main.php
                    'value' => 'nosniff',
                ],
                'XFrameOptions'=>[
-                   'class' => bicf\securityheaders\modules\HeaderXFrameOptions::class,
+                   'class' => 'bicf\securityheaders\modules\HeaderXFrameOptions',
                    'value' => 'SAMEORIGIN',
                ],
                'AccessControlAllowMethods'=>[
