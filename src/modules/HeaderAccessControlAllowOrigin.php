@@ -10,10 +10,6 @@ class HeaderAccessControlAllowOrigin extends HeaderModuleSimple
 {
     public $value;
 
-    public function init()
-    {
-    }
-
     public function run()
     {
         if(!$this->enabled){
