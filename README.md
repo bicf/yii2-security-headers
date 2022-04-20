@@ -135,7 +135,7 @@ Here follow the patched versions of BaseHtml functions to support the nonce para
 
 **Patch to Html::script helper**
 
-The pathced  *\yii\helpers\BaseHtml::script()* :
+The patched  *\yii\helpers\BaseHtml::script()* :
                                                                                                                 
 ```php
     public static function script($content, $options = [])
@@ -153,7 +153,7 @@ The pathced  *\yii\helpers\BaseHtml::script()* :
 
 **Tag script required by the project Assets**
 
-The pathced  *\yii\helpers\BaseHtml::jsFile()* :
+The patched  *\yii\helpers\BaseHtml::jsFile()* :
 
 ```php
     public static function jsFile($url, $options = [])
