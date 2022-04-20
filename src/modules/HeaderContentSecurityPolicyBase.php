@@ -37,6 +37,14 @@ abstract class HeaderContentSecurityPolicyBase extends HeaderModuleBase
     public $nonceFallback = false;
 
     /**
+     * init to complete if needed
+     */
+    public function init()
+    {
+        parent::init();
+    }
+
+    /**
      * add the security header
      */
     public function run(){

@@ -17,10 +17,6 @@ class HeaderAccessControlAllowOriginByWhiteList extends HeaderModuleSimple
      */
     public $values=[];
 
-    public function init()
-    {
-    }
-
     /**
      *
      */

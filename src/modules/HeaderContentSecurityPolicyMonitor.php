@@ -10,9 +10,5 @@ class HeaderContentSecurityPolicyMonitor extends HeaderContentSecurityPolicyBase
 {
     protected $headerName='Content-Security-Policy-Report-Only';
 
-    public function init()
-    {
-    }
-
 
 }

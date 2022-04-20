@@ -9,8 +9,5 @@ namespace bicf\securityheaders\modules;
 class HeaderContentSecurityPolicyAcl extends HeaderContentSecurityPolicyBase
 {
     protected $headerName='Content-Security-Policy';
-    public function init()
-    {
-    }
 
 }
